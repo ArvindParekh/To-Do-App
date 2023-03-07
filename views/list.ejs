@@ -1,0 +1,41 @@
+<!-- Layouts: layouts in ejs helps you create layouts for code pieces that are used regularly in our websites. We can use them in different pages of our websites to maintain the same look and feel across all the different pages of the website. Here, I've created two layouts header.ejs and footer.ejs and below is how we can include them in our pages-->
+<%- include("header.ejs") %>
+
+
+<body>
+    <!-- <%= %> this is the way to write ejs templates-->
+
+    <div class="container">
+        <div class="box" id="heading">
+            <h1 style="text-align: center;">
+                <%= listTitle %>
+            </h1>
+        </div>
+
+        <div class="box">
+            <% tasksList.forEach(function(list){ %>
+                
+                <form action="/delete" method="post">
+                    <div class="item">
+                        <input type="checkbox" name="checkbox" value="<%= list._id %>" onchange="this.form.submit()">
+                        <input type="hidden" name="listName" value="<%= listTitle %>"></input>
+                        <p name="listName">
+                            <%= list.item %>
+                        </p>
+                    </div>
+                </form>
+            <% }); %>
+
+            <form action="/" method="post" class="item">
+                <input type="text" placeholder="New Task" name="newTask">
+                <button type="submit" name="list" value="<%= listTitle %>">+</button>
+            </form>
+
+            
+        </div>
+
+        <%- include('footer.ejs') %>
+    </div>
+</body>
+
+</html>
