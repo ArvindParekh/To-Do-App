@@ -115,7 +115,6 @@ app.post('/', function (req, res) {
         List.findOne({name: listName}).then(function(data){
             data.items.push(task);
             data.save();
-
             res.redirect('/' + listName);
         })
         
